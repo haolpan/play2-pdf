@@ -6,17 +6,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lowagie.text.pdf.BaseFont;
 import nu.validator.htmlparser.dom.HtmlDocumentBuilder;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.w3c.dom.Document;
 import org.xhtmlrenderer.pdf.ITextRenderer;
-
-import com.itextpdf.text.pdf.BaseFont;
 
 import play.Environment;
 import play.Logger;
@@ -70,8 +70,7 @@ public class PdfGenerator {
 	public void addLocalFonts(List<String> fontsToLoad) {
 		if (defaultFonts == null)
 			defaultFonts = new ArrayList<>();
-		for (String font : fontsToLoad)
-			defaultFonts.add(font);
+        defaultFonts.addAll(fontsToLoad);
 	}
 
 	public Result ok(Html html, String documentBaseURL) {
@@ -110,7 +109,7 @@ public class PdfGenerator {
 
 	public void toStream(String string, OutputStream os, String documentBaseURL, List<String> fonts) {
 		try {
-			InputStream input = new ByteArrayInputStream(string.getBytes("UTF-8"));
+			InputStream input = new ByteArrayInputStream(string.getBytes(StandardCharsets.UTF_8));
 			ITextRenderer renderer = new ITextRenderer();
 			if (fonts != null)
 				for (String font : fonts) {

@@ -11,8 +11,8 @@ scalaVersion := "2.13.10"
 crossPaths := false
 
 libraryDependencies ++= Seq(
-  "commons-io" % "commons-io" % "2.11.0",
-  "org.xhtmlrenderer" % "flying-saucer-pdf-itext5" % "9.1.22",
+  "commons-io" % "commons-io" % "2.16.1",
+  "org.xhtmlrenderer" % "flying-saucer-pdf" % "9.2.0",
   "nu.validator.htmlparser" % "htmlparser" % "1.4"
 )
 
